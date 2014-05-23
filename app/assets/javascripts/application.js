@@ -21,7 +21,7 @@ $(document).ready(function() {
   function initialize() {
     //just a variable storing a location
     var mapOptions = {
-      center: new google.maps.LatLng(-34.397, 150.644),
+      center: new google.maps.LatLng(34.397, 150.644),
       zoom: 2
     };
 
@@ -40,15 +40,14 @@ $(document).ready(function() {
     var map = new google.maps.Map(document.getElementById("map-canvas"),
       mapOptions);
 
-    var loc;
+    
 
     function addPin(latitude, longitude) {
-      loc = new google.maps.LatLng(latitude, longitude);
+      var loc = new google.maps.LatLng(latitude, longitude);
       console.log(loc);
       var newMarker = new google.maps.Marker({
         position: loc,
         map: map
-        // email: email (devise)?
       });
     };
 
@@ -56,13 +55,14 @@ $(document).ready(function() {
     google.maps.event.addListener(map, "click", function(event) {
       addPin(event.latLng.A, event.latLng.k);
 
-
+      var latitude = event.latLng.A;
+      var longitude = event.latLng.k;
+      var email = $('.taco').val('#current_user.email');
       $.ajax({
-        url: form - group.attr('action'), // action: "/contacts",
-        method: form.attr('method'), // method: "/post"
+        url: '/pins.json', // action: "/contacts",
+        type: 'post',
         data: {
           "pin":
-
           {
             "latitude": latitude,
             "longitude": longitude,
